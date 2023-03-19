@@ -12,8 +12,8 @@ class Routes {
   static const String home = '/home';
 
   static final routes = <String, WidgetBuilder>{
-    onboarding: (BuildContext context) => OnboardingScreen(),
-    home: (BuildContext context) => HomeScreen(),
-    login: (BuildContext context) => LoginScreen(),
+    onboarding: (BuildContext context) => const OnboardingScreen(),
+    home: (BuildContext context) => const HomeScreen(),
+    login: (BuildContext context) => const LoginScreen(),
   };
 }

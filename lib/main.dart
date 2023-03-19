@@ -11,7 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.init();
   await setPreferredOrientations();
-  return runZonedGuarded(() async => runApp(App()), (error, stack) {});
+  return runZonedGuarded(() async => runApp(const App()), (error, stack) {});
 }
 
 Future<void> setPreferredOrientations() {

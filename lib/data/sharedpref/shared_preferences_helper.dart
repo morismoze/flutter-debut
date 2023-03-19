@@ -13,10 +13,10 @@ class SharedPreferencesHelper {
   }
 
   static bool? get isOnboarded {
-    return _sharedPreferences.getBool(Preferences.is_onboarded);
+    return _sharedPreferences.getBool(Preferences.isOnboarded);
   }
 
   static Future<bool> setIsOnboarded(bool isOnboarded) async {
-    return _sharedPreferences.setBool(Preferences.is_onboarded, isOnboarded);
+    return _sharedPreferences.setBool(Preferences.isOnboarded, isOnboarded);
   }
 }

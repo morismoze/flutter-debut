@@ -10,7 +10,7 @@ abstract class ButtonsTheme {
             backgroundColor: MaterialStateProperty.resolveWith(
                 (states) => colorScheme.primary),
             textStyle: MaterialStateProperty.resolveWith((states) =>
-                const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             foregroundColor:
                 MaterialStateProperty.all<Color>(colorScheme.secondary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

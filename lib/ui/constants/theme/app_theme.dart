@@ -7,6 +7,7 @@ class AppThemeData {
 
   static const Color _primaryColorLight = Colors.black;
   static const Color _secondaryColorLight = Colors.white;
+  static const Color _tertiaryColorLight = Color(0xFF8A8A8A);
   static const Color _errorLight = Color(0xFFB10023);
 
   static ThemeData lightThemeData = themeData(lightColorScheme);
@@ -16,7 +17,7 @@ class AppThemeData {
     return ThemeData(
         colorScheme: colorScheme,
         textTheme: _textTheme,
-        primaryColor: const Color(0xFF000000),
+        primaryColor: _primaryColorLight,
         appBarTheme: AppBarTheme(
           backgroundColor: colorScheme.background,
           elevation: 0,
@@ -28,11 +29,12 @@ class AppThemeData {
   }
 
   // This is temporary solution for theme colors that are yet to be defined
-  static const Color _toDo = Color(0xFF000000);
+  static const Color _toDo = _primaryColorLight;
 
   static const ColorScheme lightColorScheme = ColorScheme(
     primary: _primaryColorLight,
     secondary: _secondaryColorLight,
+    tertiary: _tertiaryColorLight,
     background: _secondaryColorLight,
     surface: _secondaryColorLight,
     onBackground: _primaryColorLight,
@@ -47,6 +49,7 @@ class AppThemeData {
   static const ColorScheme darkColorScheme = ColorScheme(
     primary: _toDo,
     secondary: _toDo,
+    tertiary: _toDo,
     background: _toDo,
     surface: _toDo,
     onBackground: _toDo,
@@ -65,16 +68,27 @@ class AppThemeData {
 
   // Properties are placed from the largest to the smallest (top to bottom)
   static final TextTheme _textTheme = TextTheme(
-    headlineSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 16.0),
-    headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
-    headlineLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 24.0),
-    titleSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 14.0),
-    titleMedium: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 16.0),
-    titleLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
-    bodySmall: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 16.0),
-    bodyMedium: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 16.0),
-    bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
-    labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
-    labelLarge: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 14.0),
+    headlineSmall: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 16.0, height: 1.4),
+    headlineMedium:
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0, height: 1.4),
+    headlineLarge:
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 24.0, height: 1.4),
+    titleSmall: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 14.0, height: 1.4),
+    titleMedium: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 16.0, height: 1.4),
+    titleLarge:
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0, height: 1.4),
+    bodySmall: GoogleFonts.montserrat(
+        fontWeight: _regular, fontSize: 14.0, height: 1.4),
+    bodyMedium: GoogleFonts.montserrat(
+        fontWeight: _regular, fontSize: 14.0, height: 1.4),
+    bodyLarge: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 15.0, height: 1.7),
+    labelSmall: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 12.0, height: 1.4),
+    labelLarge: GoogleFonts.montserrat(
+        fontWeight: _semiBold, fontSize: 14.0, height: 1.4),
   );
 }

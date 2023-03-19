@@ -5,7 +5,7 @@ class Button extends StatelessWidget {
   final String text;
   final Color? backgroundColor;
   final Color? textColor;
-  final IconData? iconData;
+  final IconData? suffixIconData;
   final Color? iconColor;
 
   const Button(
@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
       required this.text,
       this.backgroundColor,
       this.textColor,
-      this.iconData,
+      this.suffixIconData,
       this.iconColor})
       : super(key: key);
 
@@ -25,12 +25,25 @@ class Button extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButtonTheme.of(context).style,
           onPressed: onPressed,
-          child: Row(
-            mainAxisAlignment: iconData == null
-                ? MainAxisAlignment.center
-                : MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text(text)],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Row(
+              mainAxisAlignment: suffixIconData == null
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (suffixIconData != null) ...[
+                  Text(text),
+                  Icon(
+                    suffixIconData,
+                    size: 20,
+                  )
+                ] else ...[
+                  Text(text),
+                ]
+              ],
+            ),
           ),
         ));
   }
