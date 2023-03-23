@@ -1,4 +1,5 @@
-import 'package:debutapp/ui/constants/theme/buttons.dart';
+import 'package:debutapp/constants/theme/buttons.dart';
+import 'package:debutapp/constants/theme/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,7 +26,8 @@ class AppThemeData {
         ),
         iconTheme: IconThemeData(color: colorScheme.onPrimary),
         scaffoldBackgroundColor: colorScheme.background,
-        elevatedButtonTheme: ButtonsTheme.getElevatedButtonTheme(colorScheme));
+        elevatedButtonTheme: ButtonsTheme.getElevatedButtonTheme(colorScheme),
+        inputDecorationTheme: InputsTheme.getinputTheme(colorScheme));
   }
 
   // This is temporary solution for theme colors that are yet to be defined
@@ -73,7 +75,7 @@ class AppThemeData {
     headlineMedium:
         GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0, height: 1.4),
     headlineLarge:
-        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 24.0, height: 1.4),
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 26.0, height: 1.4),
     titleSmall: GoogleFonts.montserrat(
         fontWeight: _medium, fontSize: 14.0, height: 1.4),
     titleMedium: GoogleFonts.montserrat(

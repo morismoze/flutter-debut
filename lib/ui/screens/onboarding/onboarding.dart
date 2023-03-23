@@ -1,10 +1,12 @@
 import 'package:debutapp/data/sharedpref/shared_preferences_helper.dart';
-import 'package:debutapp/ui/screens/home/home.dart';
-import 'package:debutapp/ui/widgets/button.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:debutapp/ui/screens/login/login.dart';
+import 'package:debutapp/ui/widgets/styled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:show_up_animation/show_up_animation.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -16,17 +18,20 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
   }
 
   void _handleCtaClick() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => const HomeScreen(),
-      ),
-    );
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.bottomToTop, child: const LoginScreen()));
     SharedPreferencesHelper.setIsOnboarded(false);
   }
 
@@ -34,54 +39,89 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          minimum: const EdgeInsets.all(30.0),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                flex: 1,
-                child: SvgPicture.asset(
-                  'assets/images/onboarding.svg',
-                  semanticsLabel: 'Onboarding hero image',
-                  height: 260,
-                ),
-              ),
+                  flex: 3,
+                  child: ShowUpAnimation(
+                    delayStart: const Duration(milliseconds: 100),
+                    animationDuration: const Duration(milliseconds: 500),
+                    child: SvgPicture.asset(
+                      'assets/images/onboarding.svg',
+                      semanticsLabel: AppLocalizations.of(context)
+                          .onboardingImageSemanticsLabel,
+                    ),
+                  )),
               Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 25),
-                          child: Text(
+                        ShowUpAnimation(
+                            delayStart: const Duration(milliseconds: 700),
+                            animationDuration:
+                                const Duration(milliseconds: 500),
+                            curve: Curves.bounceIn,
+                            direction: Direction.vertical,
+                            offset: 0.5,
+                            child: Text(
                               AppLocalizations.of(context).onboardingHeadline,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineLarge!
                                   .copyWith(
-                                      color: Theme.of(context).primaryColor)),
-                        ),
+                                      color: Theme.of(context).primaryColor),
+                              textAlign: TextAlign.center,
+                            )),
                         const SizedBox(height: 15),
-                        Text(AppLocalizations.of(context).onboardingDescription,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .tertiary)),
+                        Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 40.0),
+                            child: ShowUpAnimation(
+                              delayStart: const Duration(milliseconds: 900),
+                              animationDuration:
+                                  const Duration(milliseconds: 500),
+                              curve: Curves.bounceIn,
+                              direction: Direction.vertical,
+                              offset: 0.5,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .onboardingDescription,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary),
+                                textAlign: TextAlign.center,
+                              ),
+                            )),
                       ],
                     ),
                   )),
-              Button(
-                onPressed: _handleCtaClick,
-                text: AppLocalizations.of(context).onboardingCta,
-                suffixIconData: Icons.arrow_forward_rounded,
-              )
+              ShowUpAnimation(
+                  delayStart: const Duration(milliseconds: 1200),
+                  animationDuration: const Duration(milliseconds: 500),
+                  curve: Curves.bounceIn,
+                  direction: Direction.vertical,
+                  offset: 0.5,
+                  child: StyledButton(
+                    onPressed: _handleCtaClick,
+                    text: AppLocalizations.of(context).onboardingCta,
+                    suffixIconData: Icons.arrow_forward_rounded,
+                  ))
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

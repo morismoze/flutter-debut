@@ -1,5 +1,5 @@
 import 'package:debutapp/data/sharedpref/shared_preferences_helper.dart';
-import 'package:debutapp/ui/constants/theme/app_theme.dart';
+import 'package:debutapp/constants/theme/app_theme.dart';
 import 'package:debutapp/ui/screens/home/home.dart';
 import 'package:debutapp/ui/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      supportedLocales: const [Locale('en', 'US'), Locale('hr', 'HRV')],
+      supportedLocales: const [Locale('en', 'US')],
       // These delegates make sure that the localization data for the proper language is loaded
       localizationsDelegates: const [
         AppLocalizations.delegate,

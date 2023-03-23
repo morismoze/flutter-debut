@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatefulWidget {
+class StyledTextFormField extends StatefulWidget {
   final TextEditingController? textController;
   final ValueChanged? onChanged;
   final ValueChanged? onFieldSubmitted;
@@ -12,7 +12,7 @@ class TextFieldWidget extends StatefulWidget {
   final String? hint;
   final String? errorText;
 
-  const TextFieldWidget(
+  const StyledTextFormField(
       {Key? key,
       this.textController,
       this.onChanged,
@@ -27,10 +27,10 @@ class TextFieldWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _TextFieldWidgetState();
+  State<StatefulWidget> createState() => _StyledTextFormFieldState();
 }
 
-class _TextFieldWidgetState extends State<TextFieldWidget> {
+class _StyledTextFormFieldState extends State<StyledTextFormField> {
   late bool _isPasswordVisible;
 
   @override
@@ -47,7 +47,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(_isPasswordVisible);
     return SizedBox(
         width: double.infinity,
         child: TextFormField(
@@ -63,31 +62,23 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               hintText: widget.hint,
               errorText: widget.errorText,
               prefixIcon: widget.icon != null
-                  ? Icon(
-                      widget.icon,
-                      color: Colors.grey[400],
-                      size: 20,
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Icon(
+                        widget.icon,
+                        size: 20,
+                      ),
                     )
                   : null,
               suffixIcon: widget.isObscure != null
                   ? IconButton(
-                      icon: Icon(
-                          !_isPasswordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                          color: Colors.grey[400]),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(right: 20.0),
+                      icon: Icon(!_isPasswordVisible
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
                       onPressed: togglePasswordVisibility)
-                  : null,
-              filled: true,
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              fillColor: const Color.fromARGB(18, 39, 110, 241),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF3461FF), width: 1.5),
-                  borderRadius: BorderRadius.all(Radius.circular(14))),
-              border: const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(14)))),
+                  : null),
         ));
   }
 }

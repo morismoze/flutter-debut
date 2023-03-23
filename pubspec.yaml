@@ -43,6 +43,10 @@ dependencies:
   # for dependency injection
   get_it: ^7.2.0
 
+  page_transition: ^2.0.9
+
+  show_up_animation: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

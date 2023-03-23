@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget {
+class StyledButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final Color? backgroundColor;
@@ -8,7 +8,7 @@ class Button extends StatelessWidget {
   final IconData? suffixIconData;
   final Color? iconColor;
 
-  const Button(
+  const StyledButton(
       {Key? key,
       required this.onPressed,
       required this.text,

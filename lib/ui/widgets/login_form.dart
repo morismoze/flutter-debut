@@ -1,5 +1,5 @@
-import 'package:debutapp/ui/widgets/button.dart';
-import 'package:debutapp/ui/widgets/text_field.dart';
+import 'package:debutapp/ui/widgets/styled_button.dart';
+import 'package:debutapp/ui/widgets/styled_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {
@@ -15,18 +15,19 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       child: Column(
         children: [
-          TextFieldWidget(
+          StyledTextFormField(
+            icon: Icons.email_outlined,
             hint: "E-mail",
             inputType: TextInputType.emailAddress,
           ),
           const SizedBox(height: 10),
-          TextFieldWidget(
+          StyledTextFormField(
             hint: "Password",
             inputType: TextInputType.visiblePassword,
             isObscure: true,
           ),
           const SizedBox(height: 25),
-          Button(onPressed: () => print("log"), text: "Login"),
+          StyledButton(onPressed: () => print("log"), text: "Login"),
         ],
       ),
     );
