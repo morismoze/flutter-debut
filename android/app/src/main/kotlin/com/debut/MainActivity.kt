@@ -1,4 +1,4 @@
-package io.debut.debutapp
+package com.debut
 
 import io.flutter.embedding.android.FlutterActivity
 

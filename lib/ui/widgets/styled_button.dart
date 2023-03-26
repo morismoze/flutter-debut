@@ -6,7 +6,7 @@ class StyledButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final IconData? suffixIconData;
-  final Color? iconColor;
+  final IconData? prefixIconData;
 
   const StyledButton(
       {Key? key,
@@ -15,11 +15,13 @@ class StyledButton extends StatelessWidget {
       this.backgroundColor,
       this.textColor,
       this.suffixIconData,
-      this.iconColor})
+      this.prefixIconData})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isOnlySuffixIcon = prefixIconData == null && suffixIconData != null;
+
     return SizedBox(
         width: double.infinity,
         child: ElevatedButton(
@@ -28,20 +30,24 @@ class StyledButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Row(
-              mainAxisAlignment: suffixIconData == null
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                if (prefixIconData != null) ...[
+                  Icon(
+                    prefixIconData,
+                    size: 20,
+                  )
+                ],
+                Expanded(
+                    child: isOnlySuffixIcon
+                        ? Text(text)
+                        : Center(child: Text(text))),
                 if (suffixIconData != null) ...[
-                  Text(text),
                   Icon(
                     suffixIconData,
                     size: 20,
                   )
-                ] else ...[
-                  Text(text),
-                ]
+                ],
               ],
             ),
           ),

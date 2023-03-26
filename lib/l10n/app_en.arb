@@ -1,6 +1,11 @@
 {
   "onboardingHeadline": "The best way to manage your habits",
-  "onboardingDescription": "The best way to manage your habits easily",
+  "onboardingBody": "The best way to manage your habits easily",
   "onboardingCta": "Get started",
-  "onboardingImageSemanticsLabel": "Onboarding hero image"
+  "onboardingImageSemanticsLabel": "Onboarding hero image",
+  "authHeadline": "Let's sign you in",
+  "authBody": "To use your account you should authenticate first",
+  "authFacebook": "Continue with Facebook",
+  "authGoogle": "Continue with Google",
+  "authError": "Something went wrong. Please try again or reload the app."
 }

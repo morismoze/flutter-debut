@@ -1,6 +1,6 @@
 import 'package:debutapp/ui/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
-import 'package:debutapp/ui/screens/login/login.dart';
+import 'package:debutapp/ui/screens/auth/auth.dart';
 import 'package:debutapp/ui/screens/home/home.dart';
 
 class Routes {
@@ -14,6 +14,6 @@ class Routes {
   static final routes = <String, WidgetBuilder>{
     onboarding: (BuildContext context) => const OnboardingScreen(),
     home: (BuildContext context) => const HomeScreen(),
-    login: (BuildContext context) => const LoginScreen(),
+    login: (BuildContext context) => const AuthScreen(),
   };
 }

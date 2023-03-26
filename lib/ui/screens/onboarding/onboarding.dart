@@ -1,12 +1,13 @@
 import 'package:debutapp/data/sharedpref/shared_preferences_helper.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:debutapp/ui/screens/login/login.dart';
+import 'package:debutapp/ui/screens/auth/auth.dart';
 import 'package:debutapp/ui/widgets/styled_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:show_up_animation/show_up_animation.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -31,7 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Navigator.push(
         context,
         PageTransition(
-            type: PageTransitionType.bottomToTop, child: const LoginScreen()));
+            type: PageTransitionType.bottomToTop, child: const AuthScreen()));
     SharedPreferencesHelper.setIsOnboarded(false);
   }
 
@@ -68,7 +69,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             delayStart: const Duration(milliseconds: 700),
                             animationDuration:
                                 const Duration(milliseconds: 500),
-                            curve: Curves.bounceIn,
                             direction: Direction.vertical,
                             offset: 0.5,
                             child: Text(
@@ -88,12 +88,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               delayStart: const Duration(milliseconds: 900),
                               animationDuration:
                                   const Duration(milliseconds: 500),
-                              curve: Curves.bounceIn,
                               direction: Direction.vertical,
                               offset: 0.5,
                               child: Text(
-                                AppLocalizations.of(context)
-                                    .onboardingDescription,
+                                AppLocalizations.of(context).onboardingBody,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -110,13 +108,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ShowUpAnimation(
                   delayStart: const Duration(milliseconds: 1200),
                   animationDuration: const Duration(milliseconds: 500),
-                  curve: Curves.bounceIn,
                   direction: Direction.vertical,
                   offset: 0.5,
                   child: StyledButton(
                     onPressed: _handleCtaClick,
                     text: AppLocalizations.of(context).onboardingCta,
-                    suffixIconData: Icons.arrow_forward_rounded,
+                    suffixIconData: FontAwesomeIcons.arrowRight,
                   ))
             ],
           ),
