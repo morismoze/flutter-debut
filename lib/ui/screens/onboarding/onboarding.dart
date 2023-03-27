@@ -28,12 +28,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ));
   }
 
-  void _handleCtaClick() {
-    Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.bottomToTop, child: const AuthScreen()));
-    SharedPreferencesHelper.setIsOnboarded(false);
+  void _handleCtaClick() async {
+    await SharedPreferencesHelper.setIsOnboarded(true);
+    if (mounted) {
+      Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.bottomToTop, child: const AuthScreen()));
+    }
   }
 
   @override

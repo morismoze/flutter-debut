@@ -1,4 +1,5 @@
 import 'package:debutapp/data/providers/auth_provider.dart';
+import 'package:debutapp/ui/screens/home/home.dart';
 import 'package:debutapp/ui/widgets/styled_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -73,25 +74,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       delayStart: const Duration(milliseconds: 700),
                       animationDuration: const Duration(milliseconds: 500),
                       child: StyledButton(
-                        onPressed: () async {
-                          bool status = await authProvider.signInWithGoogle();
-                          print(status);
-                          if (mounted) {
-                            if (!status) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      duration: const Duration(seconds: 10),
-                                      content: Text(AppLocalizations.of(context)
-                                          .authError)));
-                            } else {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.scale,
-                                      child: const AuthScreen()));
-                            }
-                          }
-                        },
+                        onPressed: () => _handleGoogleSignIn(authProvider),
+                        disabled: authProvider.status == Status.Authenticating,
                         text: AppLocalizations.of(context).authGoogle,
                         prefixIconData: FontAwesomeIcons.google,
                       )),
@@ -101,9 +85,14 @@ class _AuthScreenState extends State<AuthScreen> {
                       animationDuration: const Duration(milliseconds: 500),
                       child: StyledButton(
                         onPressed: () {},
+                        disabled: authProvider.status == Status.Authenticating,
                         text: AppLocalizations.of(context).authFacebook,
                         prefixIconData: FontAwesomeIcons.facebook,
                       )),
+                  const SizedBox(height: 50),
+                  if (authProvider.status == Status.Authenticating) ...[
+                    CircularProgressIndicator()
+                  ],
                 ])
               ],
             ),
@@ -111,5 +100,23 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  void _handleGoogleSignIn(authProvider) async {
+    bool status = await authProvider.signInWithGoogle();
+    if (mounted) {
+      if (!status) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: const Duration(seconds: 10),
+            content: Text(AppLocalizations.of(context).authError)));
+      } else {
+        Navigator.pushReplacement(
+            context,
+            PageTransition(
+                type: PageTransitionType.scale,
+                alignment: Alignment.bottomCenter,
+                child: const HomeScreen()));
+      }
+    }
   }
 }

@@ -7,5 +7,7 @@
   "authBody": "To use your account you should authenticate first",
   "authFacebook": "Continue with Facebook",
   "authGoogle": "Continue with Google",
-  "authError": "Something went wrong. Please try again or reload the app."
+  "authError": "Something went wrong. Please try again or reload the app.",
+  "homeAppExit": "Tap back again to exit the app",
+  "homeAppBarTitle": "My challenges"
 }

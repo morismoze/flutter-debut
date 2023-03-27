@@ -9,7 +9,7 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 * The UI will depend on the Status to decide which screen/action to be done.
 * - Uninitialized - Checking user is logged or not, the Splash Screen will be shown
 * - Authenticated - User is authenticated successfully, Home Page will be shown
-* - Authenticating - Sign In button just been pressed, progress bar will be shown
+* - Authenticating - Sign In button has just been pressed, progress bar will be shown
 * - Unauthenticated - User is not authenticated, login page will be shown
  */
 class AuthProvider extends ChangeNotifier {
@@ -27,7 +27,7 @@ class AuthProvider extends ChangeNotifier {
     _auth = FirebaseAuth.instance;
 
     // listener for authentication changes such as user sign in and sign out
-    _auth.authStateChanges().listen(onAuthStateChanged);
+    _auth.authStateChanges().listen(handleOnAuthStateChanged);
   }
 
   // Create user object based on the given User
@@ -39,17 +39,14 @@ class AuthProvider extends ChangeNotifier {
     return UserModel(
         uid: firebaseUser.uid,
         email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
-        phoneNumber: firebaseUser.phoneNumber,
-        photoUrl: firebaseUser.photoURL);
+        displayName: firebaseUser.displayName);
   }
 
   // Method to detect live auth changes such as user sign in and sign out
-  Future<void> onAuthStateChanged(User? firebaseUser) async {
+  Future<void> handleOnAuthStateChanged(User? firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Unauthenticated;
     } else {
-      _createUserFromFirebaseUserModel(firebaseUser);
       _status = Status.Authenticated;
     }
 
@@ -75,11 +72,10 @@ class AuthProvider extends ChangeNotifier {
         idToken: googleAuth?.idToken,
       );
 
-      // Once signed in, return the UserCredential
+      // Sign in
       await _auth.signInWithCredential(credential);
       return true;
     } catch (e) {
-      print(e);
       _status = Status.Unauthenticated;
       notifyListeners();
       return false;

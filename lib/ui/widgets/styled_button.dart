@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class StyledButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final bool? disabled;
   final String text;
   final Color? backgroundColor;
   final Color? textColor;
@@ -12,6 +13,7 @@ class StyledButton extends StatelessWidget {
       {Key? key,
       required this.onPressed,
       required this.text,
+      this.disabled,
       this.backgroundColor,
       this.textColor,
       this.suffixIconData,
@@ -26,7 +28,7 @@ class StyledButton extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButtonTheme.of(context).style,
-          onPressed: onPressed,
+          onPressed: disabled == true ? null : onPressed,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Row(
