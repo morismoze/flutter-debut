@@ -37,9 +37,10 @@ class AuthProvider extends ChangeNotifier {
     }
 
     return UserModel(
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-        displayName: firebaseUser.displayName);
+      uid: firebaseUser.uid,
+      email: firebaseUser.email,
+      displayName: firebaseUser.displayName,
+    );
   }
 
   // Method to detect live auth changes such as user sign in and sign out

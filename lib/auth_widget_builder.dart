@@ -13,9 +13,11 @@ import 'package:provider/provider.dart';
 * the user uid.
  */
 class AuthWidgetBuilder extends StatelessWidget {
-  const AuthWidgetBuilder(
-      {Key? key, required this.builder, required this.databaseBuilder})
-      : super(key: key);
+  const AuthWidgetBuilder({
+    Key? key,
+    required this.builder,
+    required this.databaseBuilder,
+  }) : super(key: key);
 
   final Widget Function(BuildContext, AsyncSnapshot<UserModel>) builder;
   final FirestoreDatabase Function(BuildContext context, String uid)

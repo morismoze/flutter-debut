@@ -18,37 +18,24 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
-  void initState() {
-    super.initState();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
-  }
-
-  void _handleCtaClick() async {
-    await SharedPreferencesHelper.setIsOnboarded(true);
-    if (mounted) {
-      Navigator.push(
-          context,
-          PageTransition(
-              type: PageTransitionType.bottomToTop, child: const AuthScreen()));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
                   flex: 3,
                   child: ShowUpAnimation(
                     delayStart: const Duration(milliseconds: 100),
@@ -58,8 +45,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       semanticsLabel: AppLocalizations.of(context)
                           .onboardingImageSemanticsLabel,
                     ),
-                  )),
-              Expanded(
+                  ),
+                ),
+                Expanded(
                   flex: 2,
                   child: Container(
                     margin: const EdgeInsets.only(top: 10),
@@ -68,46 +56,48 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ShowUpAnimation(
-                            delayStart: const Duration(milliseconds: 700),
+                          delayStart: const Duration(milliseconds: 700),
+                          animationDuration: const Duration(milliseconds: 500),
+                          direction: Direction.vertical,
+                          offset: 0.5,
+                          child: Text(
+                            AppLocalizations.of(context).onboardingHeadline,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge!
+                                .copyWith(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                          child: ShowUpAnimation(
+                            delayStart: const Duration(milliseconds: 900),
                             animationDuration:
                                 const Duration(milliseconds: 500),
                             direction: Direction.vertical,
                             offset: 0.5,
                             child: Text(
-                              AppLocalizations.of(context).onboardingHeadline,
+                              AppLocalizations.of(context).onboardingBody,
                               style: Theme.of(context)
                                   .textTheme
-                                  .headlineLarge!
+                                  .bodyLarge!
                                   .copyWith(
-                                      color: Theme.of(context).primaryColor),
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
+                                  ),
                               textAlign: TextAlign.center,
-                            )),
-                        const SizedBox(height: 15),
-                        Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 40.0),
-                            child: ShowUpAnimation(
-                              delayStart: const Duration(milliseconds: 900),
-                              animationDuration:
-                                  const Duration(milliseconds: 500),
-                              direction: Direction.vertical,
-                              offset: 0.5,
-                              child: Text(
-                                AppLocalizations.of(context).onboardingBody,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary),
-                                textAlign: TextAlign.center,
-                              ),
-                            )),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  )),
-              ShowUpAnimation(
+                  ),
+                ),
+                ShowUpAnimation(
                   delayStart: const Duration(milliseconds: 1200),
                   animationDuration: const Duration(milliseconds: 500),
                   direction: Direction.vertical,
@@ -116,11 +106,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onPressed: _handleCtaClick,
                     text: AppLocalizations.of(context).onboardingCta,
                     suffixIconData: FontAwesomeIcons.arrowRight,
-                  ))
-            ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  // Using StatefulWidget due to checking the mounted state in this function
+  // Maybe there is a better way?
+  void _handleCtaClick() async {
+    await SharedPreferencesHelper.setIsOnboarded(true);
+    if (mounted) {
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.bottomToTop,
+          child: const AuthScreen(),
+        ),
+      );
+    }
   }
 }

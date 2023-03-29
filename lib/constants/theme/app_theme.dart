@@ -27,7 +27,8 @@ class AppThemeData {
         iconTheme: IconThemeData(color: colorScheme.onPrimary),
         scaffoldBackgroundColor: colorScheme.background,
         elevatedButtonTheme: ButtonsTheme.getElevatedButtonTheme(colorScheme),
-        inputDecorationTheme: InputsTheme.getinputTheme(colorScheme));
+        inputDecorationTheme: InputsTheme.getInputTheme(colorScheme),
+        iconButtonTheme: ButtonsTheme.getIconButtonTheme(colorScheme),);
   }
 
   // This is temporary solution for theme colors that are yet to be defined
@@ -71,26 +72,32 @@ class AppThemeData {
   // Properties are placed from the largest to the smallest (top to bottom)
   static final TextTheme _textTheme = TextTheme(
     headlineSmall: GoogleFonts.montserrat(
-        fontWeight: _medium, fontSize: 16.0, height: 1.4),
+        fontWeight: _medium, fontSize: 22.0, height: 1.4,),
     headlineMedium:
-        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0, height: 1.4),
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 24.0, height: 1.4),
     headlineLarge:
         GoogleFonts.montserrat(fontWeight: _bold, fontSize: 26.0, height: 1.4),
+    displaySmall: GoogleFonts.montserrat(
+        fontWeight: _medium, fontSize: 18.0, height: 1.4,),
+    displayMedium:
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 22.0, height: 1.4),
+    displayLarge:
+        GoogleFonts.montserrat(fontWeight: _bold, fontSize: 22.0, height: 1.4),
     titleSmall: GoogleFonts.montserrat(
-        fontWeight: _medium, fontSize: 14.0, height: 1.4),
+        fontWeight: _medium, fontSize: 14.0, height: 1.4,),
     titleMedium: GoogleFonts.montserrat(
-        fontWeight: _medium, fontSize: 16.0, height: 1.4),
+        fontWeight: _medium, fontSize: 16.0, height: 1.4,),
     titleLarge:
         GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0, height: 1.4),
     bodySmall: GoogleFonts.montserrat(
-        fontWeight: _regular, fontSize: 14.0, height: 1.4),
+        fontWeight: _regular, fontSize: 14.0, height: 1.4,),
     bodyMedium: GoogleFonts.montserrat(
-        fontWeight: _regular, fontSize: 14.0, height: 1.4),
+        fontWeight: _regular, fontSize: 14.0, height: 1.4,),
     bodyLarge: GoogleFonts.montserrat(
-        fontWeight: _medium, fontSize: 15.0, height: 1.7),
+        fontWeight: _medium, fontSize: 15.0, height: 1.7,),
     labelSmall: GoogleFonts.montserrat(
-        fontWeight: _medium, fontSize: 12.0, height: 1.4),
+        fontWeight: _medium, fontSize: 12.0, height: 1.4,),
     labelLarge: GoogleFonts.montserrat(
-        fontWeight: _semiBold, fontSize: 14.0, height: 1.4),
+        fontWeight: _semiBold, fontSize: 14.0, height: 1.4,),
   );
 }

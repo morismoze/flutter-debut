@@ -24,44 +24,44 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-        ],
-        child: AuthWidgetBuilder(
-            databaseBuilder: databaseBuilder,
-            builder:
-                (BuildContext context, AsyncSnapshot<UserModel> userSnapshot) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                supportedLocales: const [Locale('en', 'US')],
-                // These delegates make sure that the localization data for the proper language is loaded
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                theme: AppThemeData.lightThemeData,
-                routes: Routes.routes,
-                home: Consumer<AuthProvider>(
-                  builder: (_, authProviderRef, __) {
-                    if (SharedPreferencesHelper.isOnboarded != true) {
-                      return const OnboardingScreen();
-                    }
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+      ],
+      child: AuthWidgetBuilder(
+        databaseBuilder: databaseBuilder,
+        builder: (BuildContext context, AsyncSnapshot<UserModel> userSnapshot) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: const [Locale('en', 'US')],
+            // These delegates make sure that the localization data for the proper language is loaded
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            theme: AppThemeData.lightThemeData,
+            routes: Routes.routes,
+            home: Consumer<AuthProvider>(
+              builder: (_, authProviderRef, __) {
+                if (SharedPreferencesHelper.isOnboarded != true) {
+                  return const OnboardingScreen();
+                }
 
-                    if (userSnapshot.connectionState ==
-                        ConnectionState.active) {
-                      return userSnapshot.hasData
-                          ? const HomeScreen()
-                          : const AuthScreen();
-                    }
+                if (userSnapshot.connectionState == ConnectionState.active) {
+                  return userSnapshot.hasData
+                      ? const HomeScreen()
+                      : const AuthScreen();
+                }
 
-                    return const Material(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                ),
-              );
-            }));
+                return const Material(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
   }
 }

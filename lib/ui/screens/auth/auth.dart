@@ -1,6 +1,7 @@
 import 'package:debutapp/data/providers/auth_provider.dart';
 import 'package:debutapp/ui/screens/home/home.dart';
 import 'package:debutapp/ui/widgets/styled_button.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:show_up_animation/show_up_animation.dart';
@@ -24,14 +25,19 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
       child: Scaffold(
         key: _scaffoldKey,
         body: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 20.0),
+                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,38 +45,41 @@ class _AuthScreenState extends State<AuthScreen> {
                 Column(
                   children: [
                     ShowUpAnimation(
-                        delayStart: const Duration(milliseconds: 200),
-                        animationDuration: const Duration(milliseconds: 500),
-                        child: Text(
-                          AppLocalizations.of(context).authHeadline,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                          textAlign: TextAlign.center,
-                        )),
+                      delayStart: const Duration(milliseconds: 200),
+                      animationDuration: const Duration(milliseconds: 500),
+                      child: Text(
+                        AppLocalizations.of(context).authHeadline,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(color: Theme.of(context).primaryColor),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                     const SizedBox(height: 15),
                     Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                        child: ShowUpAnimation(
-                          delayStart: const Duration(milliseconds: 400),
-                          animationDuration: const Duration(milliseconds: 500),
-                          child: Text(
-                            AppLocalizations.of(context).authBody,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.tertiary),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      child: ShowUpAnimation(
+                        delayStart: const Duration(milliseconds: 400),
+                        animationDuration: const Duration(milliseconds: 500),
+                        child: Text(
+                          AppLocalizations.of(context).authBody,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 50),
-                Column(children: [
-                  ShowUpAnimation(
+                Column(
+                  children: [
+                    ShowUpAnimation(
                       delayStart: const Duration(milliseconds: 700),
                       animationDuration: const Duration(milliseconds: 500),
                       child: StyledButton(
@@ -78,9 +87,10 @@ class _AuthScreenState extends State<AuthScreen> {
                         disabled: authProvider.status == Status.Authenticating,
                         text: AppLocalizations.of(context).authGoogle,
                         prefixIconData: FontAwesomeIcons.google,
-                      )),
-                  const SizedBox(height: 10),
-                  ShowUpAnimation(
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ShowUpAnimation(
                       delayStart: const Duration(milliseconds: 900),
                       animationDuration: const Duration(milliseconds: 500),
                       child: StyledButton(
@@ -88,12 +98,14 @@ class _AuthScreenState extends State<AuthScreen> {
                         disabled: authProvider.status == Status.Authenticating,
                         text: AppLocalizations.of(context).authFacebook,
                         prefixIconData: FontAwesomeIcons.facebook,
-                      )),
-                  const SizedBox(height: 50),
-                  if (authProvider.status == Status.Authenticating) ...[
-                    CircularProgressIndicator()
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    if (authProvider.status == Status.Authenticating) ...[
+                      const CircularProgressIndicator()
+                    ],
                   ],
-                ])
+                )
               ],
             ),
           ),
@@ -102,20 +114,25 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  void _handleGoogleSignIn(authProvider) async {
+  void _handleGoogleSignIn(AuthProvider authProvider) async {
     bool status = await authProvider.signInWithGoogle();
     if (mounted) {
       if (!status) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
             duration: const Duration(seconds: 10),
-            content: Text(AppLocalizations.of(context).authError)));
+            content: Text(AppLocalizations.of(context).authError),
+          ),
+        );
       } else {
         Navigator.pushReplacement(
-            context,
-            PageTransition(
-                type: PageTransitionType.scale,
-                alignment: Alignment.bottomCenter,
-                child: const HomeScreen()));
+          context,
+          PageTransition(
+            type: PageTransitionType.scale,
+            alignment: Alignment.bottomCenter,
+            child: const HomeScreen(),
+          ),
+        );
       }
     }
   }

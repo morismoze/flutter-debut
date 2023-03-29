@@ -15,8 +15,11 @@ Future<void> main() async {
   await SharedPreferencesHelper.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   return runZonedGuarded(
-      () async => runApp(App(
-            databaseBuilder: (_, uid) => FirestoreDatabase(uid: uid),
-          )),
-      (error, stack) {});
+    () async => runApp(
+      App(
+        databaseBuilder: (_, uid) => FirestoreDatabase(uid: uid),
+      ),
+    ),
+    (error, stack) {},
+  );
 }

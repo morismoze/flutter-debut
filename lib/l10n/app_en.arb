@@ -9,5 +9,7 @@
   "authGoogle": "Continue with Google",
   "authError": "Something went wrong. Please try again or reload the app.",
   "homeAppExit": "Tap back again to exit the app",
-  "homeAppBarTitle": "My challenges"
+  "homeAppBarTitle": "My challenges",
+  "homeHeroTitle": "You are almost there!",
+  "homeHeroGoalInfo": "day goals completed"
 }
