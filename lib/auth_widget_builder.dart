@@ -32,6 +32,8 @@ class AuthWidgetBuilder extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
         final UserModel? user = snapshot.data;
 
+        // null check for uid is needed because firebase authStateChanges
+        // stream can't accept nullable user
         if (user != null && user.uid != null) {
           /*
           * Any other Provider that relies on user data can be

@@ -11,5 +11,7 @@
   "homeAppExit": "Tap back again to exit the app",
   "homeAppBarTitle": "My challenges",
   "homeHeroTitle": "You are almost there!",
-  "homeHeroGoalInfo": "day goals completed"
+  "homeHeroGoalInfo": "day goals completed",
+  "navigationHome": "Home",
+  "navigationSettings": "Settings"
 }
