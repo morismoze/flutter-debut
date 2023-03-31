@@ -41,20 +41,6 @@ class ChallengeTile extends StatelessWidget {
   }
 
   Widget _buildTileBody() {
-    List<ChallengeTileDay> challengeTileDays = [];
-    for (var i = 0; i < userChallenge.durationInDays; i++) {
-      challengeTileDays.add(
-        ChallengeTileDay(
-          challengeDay: UserChallengeDayModel(
-            date: userChallenge.startDate!.add(Duration(days: i)),
-            isResolved: i > userChallenge.challengeDays!.length - 1
-                ? null
-                : userChallenge.challengeDays![i].isResolved,
-          ),
-        ),
-      );
-    }
-
     return SizedBox(
       height: 50.0,
       child: ListView.builder(
@@ -66,7 +52,9 @@ class ChallengeTile extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: ChallengeTileDay(
               challengeDay: UserChallengeDayModel(
-                date: userChallenge.startDate!.add(Duration(days: index)),
+                date: DateUtils.dateOnly(
+                  userChallenge.startDate!.add(Duration(days: index)),
+                ),
                 isResolved: index > userChallenge.challengeDays!.length - 1
                     ? null
                     : userChallenge.challengeDays![index].isResolved,

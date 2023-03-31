@@ -49,7 +49,7 @@ class App extends StatelessWidget {
                 }
 
                 if (userSnapshot.connectionState == ConnectionState.active) {
-                  return userSnapshot.hasData
+                  return userSnapshot.data?.uid != null
                       ? const HomeScreen()
                       : const AuthScreen();
                 }

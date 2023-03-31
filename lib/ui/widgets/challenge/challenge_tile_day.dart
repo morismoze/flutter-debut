@@ -23,7 +23,8 @@ class _ChallengeTileDayState extends State<ChallengeTileDay> {
 
   Widget _buildIcon() {
     final now = DateTime.now();
-    if (widget.challengeDay.date.isBefore(now)) {
+    if (DateUtils.dateOnly(widget.challengeDay.date)
+        .isBefore(DateUtils.dateOnly(now))) {
       return StyledIconButton(
         onPressed: () {},
         border: Border.all(
@@ -81,9 +82,7 @@ class _ChallengeTileDayState extends State<ChallengeTileDay> {
 
   Color _getBorderColor() {
     final now = DateTime.now();
-    if (widget.challengeDay.date.year == now.year &&
-        widget.challengeDay.date.month == now.month &&
-        widget.challengeDay.date.day == now.day) {
+    if (DateUtils.isSameDay(now, widget.challengeDay.date)) {
       return Theme.of(context).colorScheme.primary;
     } else {
       return Theme.of(context).colorScheme.tertiary.withOpacity(0.3);
@@ -92,9 +91,7 @@ class _ChallengeTileDayState extends State<ChallengeTileDay> {
 
   double _getBorderWidth() {
     final now = DateTime.now();
-    if (widget.challengeDay.date.year == now.year &&
-        widget.challengeDay.date.month == now.month &&
-        widget.challengeDay.date.day == now.day) {
+    if (DateUtils.isSameDay(now, widget.challengeDay.date)) {
       return 1.5;
     } else {
       return 1;
@@ -103,11 +100,10 @@ class _ChallengeTileDayState extends State<ChallengeTileDay> {
 
   Color _getFontColor() {
     final now = DateTime.now();
-    if (widget.challengeDay.date.year == now.year &&
-        widget.challengeDay.date.month == now.month &&
-        widget.challengeDay.date.day == now.day) {
+    if (DateUtils.isSameDay(now, widget.challengeDay.date)) {
       return Theme.of(context).colorScheme.primary;
-    } else if (widget.challengeDay.date.isBefore(now) &&
+    } else if (DateUtils.dateOnly(widget.challengeDay.date)
+            .isBefore(DateUtils.dateOnly(now)) &&
         widget.challengeDay.isResolved!) {
       return Theme.of(context).colorScheme.secondary;
     } else {

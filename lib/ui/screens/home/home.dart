@@ -86,8 +86,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildChallengeBuilderButton() {
     return Padding(
-      padding: const EdgeInsets.only(right: 5.0),
+      padding: const EdgeInsets.only(right: 7.5),
       child: StyledIconButton(
+        iconSize: 30,
         onPressed: () {
           if (mounted) {
             Navigator.push(
@@ -108,49 +109,44 @@ class _HomeScreenState extends State<HomeScreen> {
     return DoubleBackToCloseApp(
       snackBar:
           SnackBar(content: Text(AppLocalizations.of(context).homeAppExit)),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const HeroPercentageCard(resolvedPercentage: '32'),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: ChallengeTile(
-                        userChallenge: UserChallengeModel(
-                          id: '',
-                          creationDate: DateTime(2023, 3, 27, 17, 30),
-                          name: 'No caffeine',
-                          imageUrl: 'https://placeholder.pics/svg/1000',
-                          startDate: DateTime(2023, 3, 28, 17, 30),
-                          durationInDays: 7,
-                          challengeDays: [
-                            UserChallengeDayModel(
-                              date: DateTime(2023, 3, 28),
-                              isResolved: false,
-                            ),
-                            UserChallengeDayModel(
-                              date: DateTime(2023, 3, 29),
-                              isResolved: true,
-                            ),
-                            UserChallengeDayModel(
-                              date: DateTime(2023, 3, 30),
-                              isResolved: null,
-                            ),
-                          ],
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const HeroPercentageCard(resolvedPercentage: '32'),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.only(top: 30.0, bottom: 30.0),
+                children: [
+                  ChallengeTile(
+                    userChallenge: UserChallengeModel(
+                      id: '',
+                      creationDate: DateTime(2023, 3, 27, 17, 30),
+                      name: 'No caffeine',
+                      imageUrl: 'https://placeholder.pics/svg/1000',
+                      startDate: DateTime(2023, 3, 29, 17, 30),
+                      durationInDays: 7,
+                      challengeDays: [
+                        UserChallengeDayModel(
+                          date: DateTime(2023, 3, 29),
+                          isResolved: false,
                         ),
-                      ),
+                        UserChallengeDayModel(
+                          date: DateTime(2023, 3, 28),
+                          isResolved: true,
+                        ),
+                        UserChallengeDayModel(
+                          date: DateTime(2023, 3, 31),
+                          isResolved: null,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

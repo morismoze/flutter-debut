@@ -1,50 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StyledIconButton extends StatelessWidget {
   final VoidCallback onPressed;
   final bool? disabled;
-  final IconData icon;
   final Color? bgColor;
+  final dynamic icon;
+  final double iconSize;
   final Color? iconColor;
-  final double? iconSize;
   final BoxBorder? border;
 
   const StyledIconButton({
-    Key? key,
+    super.key,
     required this.onPressed,
-    required this.icon,
+    required this.iconSize,
     this.disabled,
     this.bgColor,
     this.iconColor,
-    this.iconSize,
     this.border,
-  }) : super(key: key);
+    this.icon,
+  });
 
-  // For some reason custom IconButtonTheme not working
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Container(
-        width: 50.0,
-        height: 50.0,
-        decoration: BoxDecoration(
-          color: bgColor,
-          shape: BoxShape.circle,
-          border: border,
-        ),
-        child: Center(
-          child: IconButton(
-            onPressed: disabled == true ? null : onPressed,
-            icon: Icon(
-              icon,
-              color: iconColor,
-              size: iconSize,
-            ),
-            iconSize: 27,
-            splashRadius: 27 / 1.25,
-          ),
-        ),
+    return Ink(
+      decoration: BoxDecoration(
+        color: bgColor,
+        shape: BoxShape.circle,
+        border: border,
+      ),
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        onPressed: disabled == true ? null : onPressed,
+        icon: _buildIcon(),
+        iconSize: iconSize,
       ),
     );
+  }
+
+  Widget _buildIcon() {
+    if (icon is IconData) {
+      return Icon(
+        icon,
+        color: iconColor,
+        size: iconSize,
+      );
+    } else {
+      return SvgPicture.asset(icon);
+    }
   }
 }

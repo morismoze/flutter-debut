@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
         body: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+                const EdgeInsets.only(left: 25.0, right: 25.0, bottom: 25.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,8 +45,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 Column(
                   children: [
                     ShowUpAnimation(
-                      delayStart: const Duration(milliseconds: 200),
-                      animationDuration: const Duration(milliseconds: 500),
+                      delayStart: const Duration(milliseconds: 300),
+                      animationDuration: const Duration(milliseconds: 300),
                       child: Text(
                         AppLocalizations.of(context).authHeadline,
                         style: Theme.of(context)
@@ -56,12 +56,12 @@ class _AuthScreenState extends State<AuthScreen> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: ShowUpAnimation(
-                        delayStart: const Duration(milliseconds: 400),
-                        animationDuration: const Duration(milliseconds: 500),
+                        delayStart: const Duration(milliseconds: 500),
+                        animationDuration: const Duration(milliseconds: 300),
                         child: Text(
                           AppLocalizations.of(context).authBody,
                           style: Theme.of(context)
@@ -81,7 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   children: [
                     ShowUpAnimation(
                       delayStart: const Duration(milliseconds: 700),
-                      animationDuration: const Duration(milliseconds: 500),
+                      animationDuration: const Duration(milliseconds: 300),
                       child: StyledButton(
                         onPressed: () => _handleGoogleSignIn(authProvider),
                         disabled: authProvider.status == Status.Authenticating,
@@ -92,7 +92,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     const SizedBox(height: 10),
                     ShowUpAnimation(
                       delayStart: const Duration(milliseconds: 900),
-                      animationDuration: const Duration(milliseconds: 500),
+                      animationDuration: const Duration(milliseconds: 300),
                       child: StyledButton(
                         onPressed: () {},
                         disabled: authProvider.status == Status.Authenticating,

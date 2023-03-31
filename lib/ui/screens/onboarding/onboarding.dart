@@ -30,7 +30,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         body: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+                const EdgeInsets.only(left: 25.0, right: 25.0, bottom: 25.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,8 +38,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Expanded(
                   flex: 3,
                   child: ShowUpAnimation(
-                    delayStart: const Duration(milliseconds: 100),
-                    animationDuration: const Duration(milliseconds: 500),
+                    delayStart: const Duration(milliseconds: 300),
+                    animationDuration: const Duration(milliseconds: 300),
                     child: SvgPicture.asset(
                       'assets/images/onboarding.svg',
                       semanticsLabel: AppLocalizations.of(context)
@@ -56,8 +56,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ShowUpAnimation(
-                          delayStart: const Duration(milliseconds: 700),
-                          animationDuration: const Duration(milliseconds: 500),
+                          delayStart: const Duration(milliseconds: 500),
+                          animationDuration: const Duration(milliseconds: 300),
                           direction: Direction.vertical,
                           offset: 0.5,
                           child: Text(
@@ -71,13 +71,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 40.0),
                           child: ShowUpAnimation(
-                            delayStart: const Duration(milliseconds: 900),
+                            delayStart: const Duration(milliseconds: 700),
                             animationDuration:
-                                const Duration(milliseconds: 500),
+                                const Duration(milliseconds: 300),
                             direction: Direction.vertical,
                             offset: 0.5,
                             child: Text(
@@ -98,8 +98,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 ShowUpAnimation(
-                  delayStart: const Duration(milliseconds: 1200),
-                  animationDuration: const Duration(milliseconds: 500),
+                  delayStart: const Duration(milliseconds: 900),
+                  animationDuration: const Duration(milliseconds: 300),
                   direction: Direction.vertical,
                   offset: 0.5,
                   child: StyledButton(

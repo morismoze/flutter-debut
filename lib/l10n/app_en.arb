@@ -12,6 +12,10 @@
   "homeAppBarTitle": "My challenges",
   "homeHeroTitle": "You are almost there!",
   "homeHeroGoalInfo": "day goals completed",
+  "challengeBuilderHeroHeadline": "Challenge yourself",
+  "challengeBuilderHeroBody": "Choose on of the pre-built habits challenges or create your own",
+  "challengeBuilderCategoriesTitle": "Categories",
+  "challengeBuilderCategoriesList": "Energy:Productivity:Relationships:Recharging:Order:Purpose:Mindful Consumption:Mindful Investment:Creativity",
   "navigationHome": "Home",
   "navigationSettings": "Settings"
 }
